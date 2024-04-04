@@ -75,11 +75,13 @@ namespace Game.Player
             gameController.ChangeColors();
             
             var main = landingAnimation.main;
-            var lowerVelocityY = _previousVelocity.y / 5;
-            main.startSpeedMultiplier = lowerVelocityY * lowerVelocityY / 4;
-            main.startColor = platform.TargetColor;
-            
-            landingAnimation.Emit(Mathf.RoundToInt(-_previousVelocity.y * 2));
+            var lowerVelocityY = _previousVelocity.y / 10;
+            main.startSpeedMultiplier = lowerVelocityY * lowerVelocityY * 4;
+            if (main.startSpeedMultiplier >= .3)
+            {
+                main.startColor = platform.TargetColor;
+                landingAnimation.Emit(Mathf.RoundToInt(-_previousVelocity.y * 2));
+            }
         }
     }
 }
