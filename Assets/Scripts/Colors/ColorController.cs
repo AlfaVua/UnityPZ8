@@ -23,5 +23,10 @@ namespace Game.Colors
             if (MainColor != _targetColor)
                 MainColor = Color.Lerp(MainColor, _targetColor, .15f);
         }
+
+        public Color GetTargetColor()
+        {
+            return _targetColor;
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Game
             mainCameraTransform.position = new Vector3(cameraPosition.x, cameraTargetY, cameraPosition.z);
         }
 
-        public void OnPlayerJumped()
+        public void ChangeColors()
         {
             foreach (var colorController in colorControllers)
             {
