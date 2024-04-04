@@ -4,10 +4,10 @@ namespace Game.Colors
 {
     public class SpriteColorController : MonoBehaviour
     {
-        private Color _targetColor;
-        private Color _targetShadowColor;
         [SerializeField] private SpriteRenderer mainRenderer;
         [SerializeField] private SpriteRenderer shadowRenderer;
+        private Color _targetColor;
+        private Color _targetShadowColor;
 
         private void Awake()
         {

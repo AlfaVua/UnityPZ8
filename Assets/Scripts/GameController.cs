@@ -6,7 +6,6 @@ namespace Game.Controller
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private Transform platformContainer;
         [SerializeField] private PlayerScript playerScript;
         [SerializeField] private Transform movementBounds;
         [SerializeField] private Transform mainCameraTransform;

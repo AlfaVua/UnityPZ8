@@ -14,7 +14,11 @@ namespace Game.Player
         [SerializeField] private float jumpPower = 7;
         [SerializeField] private float moveSpeed = 1;
         [SerializeField] private float raycastDistance = 1;
-        
+
+        private Vector3 LeftRayStartPoint =>
+            rigidBody.transform.position + Vector3.left * transform.localScale.x / 2 + Vector3.up * rayCastingOffsetY;
+        private Vector3 RightRayStartPoint =>
+            rigidBody.transform.position + Vector3.right * transform.localScale.x / 2 + Vector3.up * rayCastingOffsetY;
         private bool IsGrounded =>
             Physics2D.Raycast(LeftRayStartPoint, Vector2.down, raycastDistance, platformMask) ||
             Physics2D.Raycast(RightRayStartPoint, Vector2.down, raycastDistance, platformMask);
@@ -36,7 +40,7 @@ namespace Game.Player
 
         private void UpdateMovement()
         {
-            // Змінив з GetAxis для зручнішого керування без інерції
+            // Змінив з GetAxis для керування без інерції
             float x = 0;
             if (Input.GetKey(KeyCode.A)) x = -1;
             else if (Input.GetKey(KeyCode.D)) x = 1;
@@ -46,11 +50,8 @@ namespace Game.Player
 
         private void ChangeViewDirection(float directionX)
         {
-            if (directionX == 0)
-            {
-                return;
-            }
-            Vector2 localScale = playerViewTransform.localScale;
+            if (directionX == 0) return;
+            var localScale = playerViewTransform.localScale;
             playerViewTransform.localScale = new Vector2(Math.Abs(localScale.x) * directionX, localScale.y);
         }
 
@@ -58,13 +59,8 @@ namespace Game.Player
         {
             var positionLeft = LeftRayStartPoint;
             var positionRight = RightRayStartPoint;
-            Debug.DrawLine(positionLeft, positionLeft + Vector3.down * raycastDistance);
-            Debug.DrawLine(positionRight, positionRight + Vector3.down * raycastDistance);
+            Gizmos.DrawLine(positionLeft, positionLeft + Vector3.down * raycastDistance);
+            Gizmos.DrawLine(positionRight, positionRight + Vector3.down * raycastDistance);
         }
-
-        private Vector3 LeftRayStartPoint =>
-            rigidBody.transform.position + Vector3.left * transform.localScale.x / 2 + Vector3.up * rayCastingOffsetY;
-        private Vector3 RightRayStartPoint =>
-            rigidBody.transform.position + Vector3.right * transform.localScale.x / 2 + Vector3.up * rayCastingOffsetY;
     }
 }
