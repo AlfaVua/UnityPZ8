@@ -1,5 +1,4 @@
 using System;
-using Game.Controller;
 using UnityEngine;
 
 namespace Game.Player

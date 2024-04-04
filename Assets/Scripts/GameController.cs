@@ -2,7 +2,7 @@ using Game.Colors;
 using Game.Player;
 using UnityEngine;
 
-namespace Game.Controller
+namespace Game
 {
     public class GameController : MonoBehaviour
     {
