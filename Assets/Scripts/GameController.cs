@@ -9,7 +9,7 @@ namespace Game.Controller
         [SerializeField] private PlayerScript playerScript;
         [SerializeField] private Transform movementBounds;
         [SerializeField] private Transform mainCameraTransform;
-        [SerializeField] private SpriteColorController[] colorControllers;
+        [SerializeField] private ColorController[] colorControllers;
 
         void FixedUpdate()
         {

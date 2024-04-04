@@ -2,34 +2,42 @@ using UnityEngine;
 
 namespace Game.Colors
 {
-    public class SpriteColorController : MonoBehaviour
+    public class SpriteColorController : ColorController
     {
         [SerializeField] private SpriteRenderer mainRenderer;
         [SerializeField] private SpriteRenderer shadowRenderer;
-        private Color _targetColor;
         private Color _targetShadowColor;
 
-        private void Awake()
+        protected override Color MainColor
         {
-            _targetColor = mainRenderer.color;
-            _targetShadowColor = shadowRenderer.color;
+            get => mainRenderer.color;
+            set => mainRenderer.color = value;
         }
 
-        public void ChangeColor(Color color)
+        protected override void Awake()
         {
-            _targetColor = color;
+            base.Awake();
+            _targetShadowColor = ShadowColor;
+        }
+
+        private Color ShadowColor
+        {
+            get => shadowRenderer.color;
+            set => shadowRenderer.color = value;
+        }
+
+        public override void ChangeColor(Color color)
+        {
+            base.ChangeColor(color);
             var darkenColor = color * .8f;
             _targetShadowColor= darkenColor;
         }
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
-            // Так, я дуже люблю Lerp, поки до анімацій не дійшли лекції :D
-            if (mainRenderer.color != _targetColor)
-                mainRenderer.color = Color.Lerp(mainRenderer.color, _targetColor, .15f);
-            
-            if (shadowRenderer.color != _targetShadowColor)
-                shadowRenderer.color = Color.Lerp(shadowRenderer.color, _targetShadowColor, .15f);
+            base.FixedUpdate();
+            if (ShadowColor != _targetShadowColor)
+                ShadowColor = Color.Lerp(ShadowColor, _targetShadowColor, .15f);
         }
     }
 }
